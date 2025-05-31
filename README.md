@@ -11,7 +11,7 @@ This repository presents a complete phishing website detection system designed a
 
 The system uses a Markov Chain Monte Carlo-based Generative Adversarial Network (MCMC-GAN) to generate high-quality synthetic phishing data, which is then used to train a robust Stacking Ensemble model composed of multiple base classifiers.
 
-While the idea originated as part of a group project for CS412 at the University of the South Pacific, the full system — including architecture, implementation, training logic, and augmentation method — was solely developed by Kokanati for independent research and further optimization.
+While the idea originated as part of a group project for CS412 at the University of the South Pacific, the full system — including architecture, implementation, training logic, and augmentation method.
 
 ---
 
