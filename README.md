@@ -1,127 +1,131 @@
-# Phishing Website Detection Using MCMC-GAN and Stacking Ensemble
+# Phishing Website Detector
 
-**Developed by: Reginald Hingano**  
-**Year: 2025**
-
-This project presents a machine learning-based solution to phishing website detection. It addresses class imbalance using a custom MCMC-GAN and improves classification performance through a stacking ensemble model that combines multiple base classifiers.
+Developed by: Reginald Hingano
+Based on work originally produced in CS412 – Artificial Intelligence (USP, 2025)
 
 ---
 
-## Problem Statement
+## Overview
 
-Phishing detection datasets are typically imbalanced, with significantly fewer phishing examples compared to legitimate ones. This imbalance compromises the performance of conventional classifiers, often leading to poor generalization and high false negative rates. To address this challenge, we apply:
+This repository presents a complete phishing website detection system designed and developed to handle imbalanced datasets using generative and ensemble techniques.
 
-- A **Markov Chain Monte Carlo–based Generative Adversarial Network (MCMC-GAN)** for data augmentation.
-- A **stacking ensemble model** to enhance the robustness and accuracy of phishing detection.
+The system uses a Markov Chain Monte Carlo-based Generative Adversarial Network (MCMC-GAN) to generate high-quality synthetic phishing data, which is then used to train a robust Stacking Ensemble model composed of multiple base classifiers.
 
----
-
-## System Architecture
-
-```
-Raw Dataset (CSV)
-        ↓
-Feature Selection (SelectKBest, Top 30 Features)
-        ↓
-MCMC-GAN Training (Generator + Discriminator + MCMC Sampler)
-        ↓
-Balanced Dataset (Real + Synthetic Phishing Samples)
-        ↓
-Model Training (Logistic Regression, Random Forest, XGBoost, CatBoost)
-        ↓
-Stacking Ensemble
-        ↓
-Evaluation and Model Export
-```
+While the idea originated as part of a group project for CS412 at the University of the South Pacific, the full system — including architecture, implementation, training logic, and augmentation method — was solely developed by Kokanati for independent research and further optimization.
 
 ---
 
-## Environment Setup
+## Features
 
-### Step 1: Clone the Repository
-
-```bash
-git clone https://github.com/Kokanati/CS412-Group9.git
-cd CS412-Group9
-```
-
-### Step 2: Create and Activate a Virtual Environment
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 3: Install Required Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Prepare Dataset
-
-Ensure your dataset is saved at:
-
-```
-data/phishing_dataset.csv
-```
-
-The dataset must include a column named `status`:
-- `0` represents legitimate websites
-- `1` represents phishing websites
-
----
-
-## Execution Instructions
-
-### Train MCMC-GAN and Generate Balanced Dataset
-
-```bash
-python train.py
-```
-
-### Train and Evaluate Classifiers
-
-```bash
-python test.py
-```
-
-Outputs include:
-- Synthetic data and balanced dataset
-- Trained model files
-- Evaluation metrics (Accuracy, Precision, Recall, F1 Score, ROC-AUC)
-
-All outputs are stored in the `outputs/` directory.
-
----
-
-## Key Components
-
-- **Data Augmentation:** MCMC-GAN with Metropolis-Hastings sampling
-- **Feature Selection:** Mutual Information via `SelectKBest`
-- **Classifiers:** Logistic Regression, Random Forest, XGBoost, CatBoost
-- **Ensemble Method:** StackingClassifier (scikit-learn)
-- **Evaluation Metrics:** Accuracy, Precision, Recall, F1 Score, ROC-AUC
+- Custom-built MCMC-GAN (TensorFlow/Keras)
+- Feature selection with SelectKBest (mutual information)
+- Multi-model stacking with Logistic Regression, Random Forest, XGBoost, CatBoost
+- Extensive evaluation: Accuracy, Precision, Recall, F1, ROC-AUC
+- Organized, modular architecture for extensibility
 
 ---
 
 ## Project Structure
 
-```
-CS412-Group9/
-├── data/                  # Input phishing dataset (CSV)
-├── logs/                  # Optional logs directory
-├── outputs/               # Augmented dataset and model outputs
-├── mcmc_gan/              # GAN modules (generator, discriminator, sampler)
-├── utils/                 # Feature selection utilities
-├── train.py               # Training pipeline (MCMC-GAN + data balancing)
-├── test.py                # Classifier training and evaluation
-├── config.py              # Configuration settings
-└── requirements.txt       # Python dependencies
-```
+PhishingWebsite_Detector/
+├── data/                  # Raw dataset (CSV format)  
+├── logs/                  # Optional log outputs  
+├── outputs/               # Balanced datasets, models, evaluations  
+├── mcmc_gan/              # GAN modules  
+│   ├── generator.py  
+│   ├── discriminator.py  
+│   └── mcmc_sampler.py  
+├── utils/  
+│   └── feature_selector.py  
+├── train.py               # GAN training + data generation  
+├── test.py                # Model training and evaluation  
+├── config.py              # Hyperparameters and paths  
+├── requirements.txt       # Project dependencies  
+└── README.md              # This file  
 
 ---
 
-## Acknowledgements
+## How to Use
 
-This system was developed as part of the CS412 – Artificial Intelligence course (2025) at the University of the South Pacific. It demonstrates the practical application of generative models and ensemble learning in addressing real-world cybersecurity challenges.
+1. Clone the Repository
+
+```
+git clone https://github.com/Kokanati/PhishingWebsite_Detector.git
+cd PhishingWebsite_Detector
+```
+
+2. Create and Activate a Virtual Environment
+
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+
+3. Install Dependencies
+
+```
+pip install -r requirements.txt
+```
+
+4. Add Your Dataset
+
+Place your CSV dataset inside the `data/` folder and name it:
+
+```
+data/phishing_dataset.csv
+```
+
+This CSV must include a column named `status`, where:
+- 0 = legitimate website
+- 1 = phishing website
+
+---
+
+## Run the System
+
+Step 1: Train the GAN and Balance the Dataset
+
+```
+python train.py
+```
+
+Step 2: Train Classifiers and Evaluate
+
+```
+python test.py
+```
+
+Results are saved in the `outputs/` directory.
+
+---
+
+## Evaluation Metrics
+
+The system outputs:
+- Accuracy
+- Precision
+- Recall
+- F1 Score
+- ROC-AUC
+
+These are printed in the terminal and saved in `outputs/`.
+
+---
+
+## Academic Acknowledgement
+
+This project evolved from coursework submitted in the CS412 Artificial Intelligence course at the University of the South Pacific (2025).  
+However, the codebase, GAN training logic, data augmentation design, and model architecture were independently developed by Kokanati.
+
+---
+
+## License
+
+This repository is intended for academic and research use only.  
+© 2025 Kokanati. All rights reserved.
+
+---
+
+## Contributing
+
+Contributions and feedback are welcome. Please fork this repository or open an issue to discuss improvements or enhancements.
