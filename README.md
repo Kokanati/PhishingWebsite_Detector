@@ -1,7 +1,7 @@
 # Phishing Website Detection Using MCMC-GAN and Stacking Ensemble
 
-**Developed by: CS412 Group 9**  
-**Academic Year: 2025**
+**Developed by: Reginald Hingano**  
+**Year: 2025**
 
 This project presents a machine learning-based solution to phishing website detection. It addresses class imbalance using a custom MCMC-GAN and improves classification performance through a stacking ensemble model that combines multiple base classifiers.
 
